@@ -39,9 +39,9 @@ const glue = (schemaFolderPath, options={}) => {
 
 	const jsFiles = glob.sync(schemaJsFiles, { ignore: ignored }) || []
 	const graphqlFiles = glob.sync(schemaGraphQlFiles, { ignore: ignored }) || []
-	const modules = jsFiles.map(f => require(path.join(CWD, f)))
+	const modules = jsFiles.map(f => require(path.join(f)))
 	modules.push(...graphqlFiles.map(f => {
-		const parts = getSchemaParts(fs.readFileSync(path.join(CWD, f), 'utf8'))
+		const parts = getSchemaParts(fs.readFileSync(path.join(f), 'utf8'))
 		if (!parts)
 			return null
 		else
